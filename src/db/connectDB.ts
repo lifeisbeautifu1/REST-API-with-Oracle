@@ -8,7 +8,8 @@ export async function connectDB(){
             user: 'PAS_6308',
             password: '89179645957',
             connectString: 'localhost:1521/XE',
-            poolAlias: 'mypool'
+            poolAlias: 'mypool',
+            poolMax: 999,
         })
         // dbConnection = await oracledb.getConnection({
         //     user: 'PAS_6308',
