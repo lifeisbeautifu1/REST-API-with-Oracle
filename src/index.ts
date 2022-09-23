@@ -5,7 +5,10 @@ import 'express-async-errors'
 
 import { connectDB } from './db/connectDB';
 import errorHandler from './middleware/errorHandler';
+
 import studentsRouter from './routes/students'
+import sessionsRouter from './routes/sessions'
+import stipsRouter from './routes/stip'
 
 
 const app = express()
@@ -16,6 +19,8 @@ const PORT = process.env.PORT || 5000;
 app.use(express.json())
 
 app.use('/api/students', studentsRouter)
+app.use('/api/sessions', sessionsRouter)
+app.use('/api/stips', stipsRouter)
 
 
 app.use(errorHandler)

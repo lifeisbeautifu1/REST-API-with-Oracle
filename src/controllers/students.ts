@@ -2,12 +2,11 @@ import { Request, Response} from 'express'
 const oracleDB = require('oracledb')
 
 
-
 export const getStudents = async (req: Request, res: Response) => {
 
     const dbConnection = await oracleDB.getConnection('mypool')
 
-    const students = await dbConnection.execute('SELECT * FROM STUDENTS');
+    const students = await dbConnection.execute('SELECT * FROM STUDENTS ORDER BY STUDENTS.Num ASC');
 
     res.status(200).json(students.rows)
   

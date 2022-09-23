@@ -12,10 +12,10 @@ router.get('/', getSessions)
 
 router.get('/user/:id', getUserSessions)
 
-router.get('/:id', getSession)
+router.get('/:userId/:id', getSession)
 
-router.patch('/:id', updateSession)
+router.patch('/:userId/:id', updateSession)
 
-router.delete('/:id', deleteSession)
+router.delete('/:userId/:id', deleteSession)
 
 export default router;
