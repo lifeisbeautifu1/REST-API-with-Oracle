@@ -1,10 +1,11 @@
-import { useRestaurantContext } from '../context';
 import { useNavigate } from 'react-router-dom';
-import { IStudent } from '../interfaces';
 import axios from 'axios';
 
+import { useStudentsContext } from '../contexts/studentsContext';
+import { IStudent } from '../interfaces';
+
 const StudentsList = () => {
-  const { studentsState: state, studentsDispatch: dispatch } = useRestaurantContext();
+  const { studentsState: {currentStudents}, studentsDispatch: dispatch } = useStudentsContext();
   const navigate = useNavigate();
 
   const handleUpdate = async (
@@ -28,31 +29,32 @@ const StudentsList = () => {
     }
   };
 
+
   return (
-    <table className="bg-gray-100 shadow-md text-left text-sm mt-12">
+    <table className="bg-gray-100 shadow-md text-left text-sm mt-4">
       <thead className="bg-indigo-400 text-white">
-        <tr>
-          <th className="p-4 px-8">Num</th>
-          <th className="p-4 px-8">Fname</th>
-          <th className="p-4 px-8">Year</th>
-          <th className="p-4 px-8">Bday</th>
-          <th className="p-4 px-8">Plate</th>
-          <th className="p-4 px-8">Mb</th>
-          <th className="p-4 px-8">Money</th>
-          <th className="p-4 px-8">Address</th>
+        <tr className="text-center">
+          <th className="p-4 px-8 cursor-pointer" onClick={() => dispatch({type:'SORT_ID'})}>Num</th>
+          <th className="p-4 px-8 cursor-pointer" onClick={() => dispatch({type: 'SORT_FNAME'})}>Fname</th>
+          <th className="p-4 px-8 cursor-pointer" onClick={() => dispatch({type:'SORT_YEAR'})}>Year</th>
+          <th className="p-4 px-8 cursor-pointer" onClick={() => dispatch({type: 'SORT_BDAY'})}>Bday</th>
+          <th className="p-4 px-8 cursor-pointer" onClick={() => dispatch({type: 'SORT_PLATE'})}>Plate</th>
+          <th className="p-4 px-8 cursor-pointer" onClick={() => dispatch({type: 'SORT_MB'})}>Mb</th>
+          <th className="p-4 px-8 cursor-pointer" onClick={() => dispatch({type: 'SORT_MONEY'})}>Money</th>
+          <th className="p-4 px-8 cursor-pointer" onClick={() => dispatch({type: 'SORT_ADDRESS'})}>Address</th>
           <th className="p-4 px-8"></th>
           <th className="p-4 px-8"></th>
         </tr>
       </thead>
       <tbody>
-        {state.map((s) => (
-          <tr
+        {currentStudents.map((s) =>  {
+          return <tr
             key={s.NUM}
             onClick={(e) => navigate('/students/' + s.NUM)}
-            className="text-gray-500 cursor-pointer hover:bg-gray-200/90"
+            className="text-gray-500 cursor-pointer text-center hover:bg-gray-200/90"
           >
             <td className="py-3 px-8">{s.NUM}</td>
-            <td className="py-3 px-8">{s.YEAR}</td>
+            <td className="py-3 px-8">{s.FNAME}</td>
             <td className="py-3 px-8">
               {s.YEAR}
             </td>
@@ -72,13 +74,13 @@ const StudentsList = () => {
             <td className="p-3">
               <button
                 onClick={(e) => handleDelete(e, s)}
-                className="py-2 px-3 bg-red-400 text-white hover:bg-red-400/90 rounded shadow cursor-pointer"
+                className="py-2 px-3 bg-red-400 text-white hover:bg-red-500/90 rounded shadow cursor-pointer"
               >
                 Delete
               </button>
             </td>
           </tr>
-        ))}
+})}
       </tbody>
     </table>
   );

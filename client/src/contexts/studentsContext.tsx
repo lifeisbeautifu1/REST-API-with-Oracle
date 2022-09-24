@@ -3,17 +3,13 @@ import React, {
   useContext,
   useReducer,
   useEffect,
-  useState,
 } from 'react';
-import { studentsReducer, StudentsAction } from './reducers/studentsReducer';
-import { IStudent } from './interfaces';
+import { studentsReducer, StudentsAction, State } from '../reducers/studentsReducer';
 import axios from 'axios';
 
 interface IStudentsContext {
-  studentsState: IStudent[];
+  studentsState: State,
   studentsDispatch: React.Dispatch<StudentsAction>;
-  student: IStudent | null;
-  setStudent: React.Dispatch<React.SetStateAction<IStudent | null>>;
 }
 
 export const StudentsContext = createContext<IStudentsContext>(
@@ -27,8 +23,19 @@ interface StudentsContextProviderProps {
 export const StudentsContextProvider: React.FC<
   StudentsContextProviderProps
 > = ({ children }) => {
-  const [studentsState, studentsDispatch] = useReducer(studentsReducer, []);
-  const [student, setStudent] = useState<IStudent | null>(null);
+  const [studentsState, studentsDispatch] = useReducer(
+    studentsReducer,
+     {students: [],
+     currentStudents: [],
+      sort_id: 'ASC',
+       sort_year: 'ASC',
+       sort_plate: 'ASC',
+       sort_mb: 'ASC',
+       sort_money: 'ASC',
+       sort_fname: 'DESC',
+       sort_bday: 'ASC',
+       sort_address: 'ASC'
+      });
 
   useEffect(() => {
     const fetchStudents= async () => {
@@ -47,8 +54,6 @@ export const StudentsContextProvider: React.FC<
       value={{
         studentsState,
         studentsDispatch,
-        student,
-        setStudent,
         
       }}
     >
@@ -57,4 +62,4 @@ export const StudentsContextProvider: React.FC<
   );
 };
 
-export const useRestaurantContext = () => useContext(StudentsContext);
+export const useStudentsContext = () => useContext(StudentsContext);
