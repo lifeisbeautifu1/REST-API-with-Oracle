@@ -64,15 +64,15 @@ const PaginateItems: React.FC<PaginateItemsProps> = ({ itemsPerPage }) => {
       pageCount={pageCount}
       previousLabel="Previous"
       pageClassName="page-item"
-      pageLinkClassName="page-link"
-      previousClassName="page-item"
-      previousLinkClassName="page-link"
+      pageLinkClassName="page-link py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+      previousClassName="page-item "
+      previousLinkClassName="rounded-tl rounded-bl page-link py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
       nextClassName="page-item"
-      nextLinkClassName="page-link"
+      nextLinkClassName="rounded-tr rounded-br page-link py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
       breakLabel="..."
       breakClassName="page-item"
-      breakLinkClassName="page-link"
-      containerClassName="pagination"
+      breakLinkClassName="page-link py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+      containerClassName="inline-flex -space-x-px rounded my-10"
       activeClassName="active"
       //   renderOnZeroPageCount={null}
     />

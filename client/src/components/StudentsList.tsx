@@ -12,6 +12,7 @@ const StudentsList = () => {
     student: IStudent
   ) => {
     dispatch({ type: "SET_SELECTED_STUDENT", payload: student });
+    dispatch({ type: "SET_IS_UPDATE", payload: true });
   };
 
   const handleDelete = async (

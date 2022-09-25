@@ -36,6 +36,8 @@ export const StudentsContextProvider: React.FC<
     sort_bday: "ASC",
     sort_address: "ASC",
     showConfirm: false,
+    isInsert: false,
+    isUpdate: false,
     selectedStudent: null,
   });
 

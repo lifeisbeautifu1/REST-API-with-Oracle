@@ -1,5 +1,6 @@
 import Navbar from "./Navbar";
 import ConfirmStudentModal from "./ConfirmStudentModal";
+import StudentsModal from "./StudentsModal";
 
 interface SharedLayoutProps {
   children: React.ReactNode;
@@ -10,6 +11,7 @@ const SharedLayout: React.FC<SharedLayoutProps> = ({ children }) => {
     <>
       <Navbar />
       <ConfirmStudentModal />
+      <StudentsModal />
       {children}
     </>
   );
