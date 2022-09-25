@@ -27,7 +27,7 @@ export const StudentsContextProvider: React.FC<
     currentStudents: [],
     filteredStudents: [],
     searchTerm: "",
-    sort_id: "ASC",
+    sort_num: "ASC",
     sort_year: "ASC",
     sort_plate: "ASC",
     sort_mb: "ASC",

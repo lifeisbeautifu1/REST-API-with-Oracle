@@ -2,7 +2,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import React, { useCallback, useEffect, useState } from "react";
 import axios from "axios";
 
-import { useStudentsContext } from "../contexts/studentsContext";
+import { useSessionsContext } from "../contexts/sessionsContext";
 
 const backdrop = {
   hidden: {
@@ -18,35 +18,34 @@ const backdrop = {
 
 const initialState = {
   NUM: "",
-  FNAME: "",
-  YEAR: "",
-  BDAY: "",
-  PLATE: "",
-  MB: "",
-  MONEY: "",
-  ADDRESS: "",
+  SESSNUM: "",
+  SUB1: "",
+  SUB2: "",
+  SUB3: "",
 };
 
-const StudentsModal = () => {
+const SessionsModal = () => {
   const {
-    studentsState: { isInsert, isUpdate, selectedStudent },
-    studentsDispatch: dispatch,
-  } = useStudentsContext();
+    sessionsState: { isInsert, isUpdate, selectedSession },
+    sessionsDispatch: dispatch,
+  } = useSessionsContext();
 
   const [formState, setFormState] = useState<any>(initialState);
 
   const onInsert = async () => {
-    const { data } = await axios.post("/students", formState);
+    const { data } = await axios.post("/sessions", formState);
     dispatch({ type: "ADD", payload: data });
     onClose();
   };
 
   const onUpdate = async () => {
-    if (selectedStudent) {
-      const { data } = await axios.patch("/students/" + selectedStudent.NUM, {
-        ...formState,
-        MONEY: +formState.MONEY,
-      });
+    if (selectedSession) {
+      const { data } = await axios.patch(
+        "/sessions/" + selectedSession.NUM + "/" + selectedSession.SESSNUM,
+        {
+          ...formState,
+        }
+      );
       dispatch({ type: "UPDATE", payload: data });
       onClose();
     }
@@ -57,13 +56,12 @@ const StudentsModal = () => {
   }, [isInsert]);
 
   useEffect(() => {
-    if (selectedStudent) {
+    if (selectedSession) {
       setFormState({
-        ...selectedStudent,
-        BDAY: selectedStudent.BDAY.slice(0, 10),
+        ...selectedSession,
       });
     }
-  }, [isUpdate, selectedStudent]);
+  }, [isUpdate, selectedSession]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormState({
@@ -79,14 +77,14 @@ const StudentsModal = () => {
   };
 
   const onClose = useCallback(() => {
-    dispatch({ type: "SET_SELECTED_STUDENT", payload: null });
+    dispatch({ type: "SET_SELECTED_SESSION", payload: null });
     dispatch({ type: "SET_IS_INSERT", payload: false });
     dispatch({ type: "SET_IS_UPDATE", payload: false });
   }, [dispatch]);
 
   useEffect(() => {
     const closeModal = (e: any) => {
-      if (e.target.id === "studentsModal") onClose();
+      if (e.target.id === "sessionsModal") onClose();
     };
     window.addEventListener("click", closeModal);
     // return window.removeEventListener("click", closeModal);
@@ -97,7 +95,7 @@ const StudentsModal = () => {
       {(isInsert || isUpdate) && (
         <motion.div
           variants={backdrop}
-          id="studentsModal"
+          id="sessionsModal"
           initial="hidden"
           animate="visible"
           exit="hidden"
@@ -111,8 +109,8 @@ const StudentsModal = () => {
               <div className="flex justify-between items-start p-4 rounded-t border-b dark:border-gray-600">
                 <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
                   {isUpdate && !isInsert
-                    ? "Edit student"
-                    : "Insert new student"}
+                    ? "Edit session"
+                    : "Insert new session"}
                 </h3>
                 <button
                   type="button"
@@ -147,8 +145,6 @@ const StudentsModal = () => {
                       disabled={isUpdate}
                       value={formState.NUM}
                       onChange={handleChange}
-                      min={100000}
-                      max={999999}
                       type="number"
                       name="NUM"
                       id="first-name"
@@ -158,129 +154,78 @@ const StudentsModal = () => {
                   </div>
                   <div className="col-span-6 sm:col-span-3">
                     <label
-                      htmlFor="FNAME"
+                      htmlFor="SESSNUM"
                       className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                     >
-                      Fname
+                      SessNum
                     </label>
                     <input
-                      value={formState.FNAME}
+                      value={formState.SESSNUM}
                       onChange={handleChange}
-                      type="text"
-                      name="FNAME"
-                      id="FNAME"
+                      type="number"
+                      name="SESSNUM"
+                      id="SESSNUM"
+                      min={1}
+                      max={8}
                       className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                      placeholder="John Doe"
+                      placeholder="1-8"
                     />
                   </div>
                   <div className="col-span-6 sm:col-span-3">
                     <label
-                      htmlFor="YEAR"
+                      htmlFor="SUB1"
                       className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                     >
-                      Year
+                      Sub1
                     </label>
                     <input
                       type="number"
-                      value={formState.YEAR}
+                      value={formState.SUB1}
                       onChange={handleChange}
-                      min={1900}
-                      name="YEAR"
-                      id="YEAR"
+                      name="SUB1"
+                      id="SUB1"
+                      min={2}
+                      max={5}
                       className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                      placeholder="2018"
+                      placeholder="4"
                     />
                   </div>
                   <div className="col-span-6 sm:col-span-3">
                     <label
-                      htmlFor="BDAY"
+                      htmlFor="SUB2"
                       className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                     >
-                      Birthday
+                      Sub2
                     </label>
                     <input
-                      value={formState.BDAY}
-                      onChange={handleChange}
-                      type="date"
-                      name="BDAY"
-                      id="BDAY"
-                      className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                      placeholder="2000/10/10"
-                    />
-                  </div>
-                  <div className="col-span-6 sm:col-span-3">
-                    <label
-                      htmlFor="PLATE"
-                      className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                    >
-                      Plate
-                    </label>
-                    <input
-                      value={formState.PLATE}
-                      onChange={handleChange}
-                      min={0}
-                      max={1}
                       type="number"
-                      name="PLATE"
-                      id="PLATE"
-                      className=" shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                      placeholder="0 or 1"
+                      value={formState.SUB2}
+                      onChange={handleChange}
+                      name="SUB2"
+                      id="SUB2"
+                      min={2}
+                      max={5}
+                      className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      placeholder="4"
                     />
                   </div>
                   <div className="col-span-6 sm:col-span-3">
                     <label
-                      htmlFor="MB"
+                      htmlFor="SUB3"
                       className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                     >
-                      Mb
+                      Sub3
                     </label>
                     <input
-                      value={formState.MB}
+                      type="number"
+                      value={formState.SUB3}
                       onChange={handleChange}
                       min={2}
                       max={5}
-                      type="number"
-                      name="MB"
-                      id="MB"
+                      name="SUB3"
+                      id="SUB3"
                       className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                      placeholder="4.23"
-                    />
-                  </div>
-                  <div className="col-span-6 sm:col-span-3">
-                    <label
-                      htmlFor="MONEY"
-                      className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                    >
-                      Money
-                    </label>
-                    <input
-                      disabled={!(+formState.PLATE === 1)}
-                      value={formState.MONEY}
-                      onChange={handleChange}
-                      min={10000}
-                      max={99999}
-                      type="number"
-                      name="MONEY"
-                      id="MONEY"
-                      className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                      placeholder="20000"
-                    />
-                  </div>
-                  <div className="col-span-6 sm:col-span-3">
-                    <label
-                      htmlFor="ADDRESS"
-                      className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                    >
-                      Address
-                    </label>
-                    <input
-                      value={formState.ADDRESS}
-                      onChange={handleChange}
-                      type="text"
-                      name="ADDRESS"
-                      id="ADDRESS"
-                      className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                      placeholder="274 Grasskamp Drive"
+                      placeholder="4"
                     />
                   </div>
                 </div>
@@ -302,4 +247,4 @@ const StudentsModal = () => {
   );
 };
 
-export default StudentsModal;
+export default SessionsModal;

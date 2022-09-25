@@ -9,8 +9,9 @@ const containerVariants = {
   },
   visible: {
     opacity: 1,
+
     transition: {
-      duration: 0.5,
+      duration: 1,
     },
   },
   exit: {
@@ -28,7 +29,7 @@ const StudentsPage = () => {
       initial="hidden"
       animate="visible"
       exit="exit"
-      className="font-primary w-4/5 mx-auto mt-8 h-full flex flex-col items-center"
+      className="font-primary w-4/5 mx-auto h-full flex flex-col items-center"
     >
       <div className="w-full flex items-center justify-center relative">
         <button

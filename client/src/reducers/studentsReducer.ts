@@ -10,7 +10,7 @@ export type State = {
   isUpdate: boolean;
   showConfirm: boolean;
   selectedStudent: IStudent | null;
-  sort_id: ORDER;
+  sort_num: ORDER;
   sort_year: ORDER;
   sort_plate: ORDER;
   sort_mb: ORDER;
@@ -63,7 +63,7 @@ export type StudentsAction =
       payload: boolean;
     }
   | {
-      type: "SORT_ID";
+      type: "SORT_NUM";
     }
   | {
       type: "SORT_YEAR";
@@ -168,12 +168,12 @@ export const studentsReducer = (
             ),
       };
     }
-    case "SORT_ID": {
+    case "SORT_NUM": {
       return {
         ...state,
-        sort_id: state.sort_id === "DESC" ? "ASC" : "DESC",
+        sort_num: state.sort_num === "DESC" ? "ASC" : "DESC",
         filteredStudents:
-          state.sort_id === "DESC"
+          state.sort_num === "DESC"
             ? state.filteredStudents.sort((a, b) => a.NUM - b.NUM)
             : state.filteredStudents.sort((a, b) => b.NUM - a.NUM),
       };

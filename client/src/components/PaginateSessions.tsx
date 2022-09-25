@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import ReactPaginate from "react-paginate";
 
-import { useStudentsContext } from "../contexts/studentsContext";
+import { useSessionsContext } from "../contexts/sessionsContext";
 
 interface PaginateItemsProps {
   itemsPerPage: number;
@@ -12,46 +12,41 @@ const PaginateItems: React.FC<PaginateItemsProps> = ({ itemsPerPage }) => {
   const [itemOffset, setItemOffset] = useState(0);
 
   const {
-    studentsState: {
-      students,
-      filteredStudents,
+    sessionsState: {
+      sessions,
+      filteredSessions,
       sort_num,
-      sort_year,
-      sort_plate,
-      sort_money,
-      sort_mb,
-      sort_fname,
-      sort_bday,
-      sort_address,
+      sort_sessnum,
+      sort_sub1,
+      sort_sub2,
+      sort_sub3,
     },
-    studentsDispatch: dispatch,
-  } = useStudentsContext();
+    sessionsDispatch: dispatch,
+  } = useSessionsContext();
 
   useEffect(() => {
     const endOffset = itemOffset + itemsPerPage;
+    filteredSessions.slice(itemOffset, endOffset);
     dispatch({
-      type: "SET_CURRENT_STUDENTS",
-      payload: filteredStudents.slice(itemOffset, endOffset),
+      type: "SET_CURRENT_SESSIONS",
+      payload: filteredSessions.slice(itemOffset, endOffset),
     });
-    setPageCount(Math.ceil(filteredStudents.length / itemsPerPage));
+    setPageCount(Math.ceil(filteredSessions.length / itemsPerPage));
   }, [
     itemOffset,
     dispatch,
     itemsPerPage,
-    students,
-    filteredStudents,
+    sessions,
+    filteredSessions,
     sort_num,
-    sort_year,
-    sort_plate,
-    sort_mb,
-    sort_money,
-    sort_fname,
-    sort_bday,
-    sort_address,
+    sort_sessnum,
+    sort_sub1,
+    sort_sub2,
+    sort_sub3,
   ]);
 
   const handlePageClick = (event: any) => {
-    const newOffset = (event.selected * itemsPerPage) % filteredStudents.length;
+    const newOffset = (event.selected * itemsPerPage) % filteredSessions.length;
     setItemOffset(newOffset);
   };
 
@@ -74,7 +69,7 @@ const PaginateItems: React.FC<PaginateItemsProps> = ({ itemsPerPage }) => {
       breakLinkClassName="page-link py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
       containerClassName="inline-flex -space-x-px rounded my-10"
       activeClassName="active"
-      //   renderOnZeroPageCount={null}
+      // renderOnZeroPageCount={null}
     />
   );
 };

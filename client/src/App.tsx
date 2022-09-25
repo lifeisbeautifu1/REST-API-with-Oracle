@@ -3,7 +3,7 @@ import { Navigate } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 
 import { SharedLayout } from "./components";
-import { StudentsPage, SessionsPage, StipsPage } from "./pages";
+import { StudentsPage, SessionsPage } from "./pages";
 
 function App() {
   const location = useLocation();
@@ -24,14 +24,6 @@ function App() {
           element={
             <SharedLayout>
               <SessionsPage />
-            </SharedLayout>
-          }
-        />
-        <Route
-          path="/stips"
-          element={
-            <SharedLayout>
-              <StipsPage />
             </SharedLayout>
           }
         />

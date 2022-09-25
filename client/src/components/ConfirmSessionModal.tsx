@@ -2,7 +2,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useCallback } from "react";
 import axios from "axios";
 
-import { useStudentsContext } from "../contexts/studentsContext";
+import { useSessionsContext } from "../contexts/sessionsContext";
 
 const backdrop = {
   hidden: {
@@ -18,18 +18,18 @@ const backdrop = {
 
 const ConfirmModal = () => {
   const {
-    studentsState: { showConfirm, selectedStudent },
-    studentsDispatch: dispatch,
-  } = useStudentsContext();
+    sessionsState: { showConfirm, selectedSession },
+    sessionsDispatch: dispatch,
+  } = useSessionsContext();
 
   const onClose = useCallback(() => {
-    dispatch({ type: "SET_SELECTED_STUDENT", payload: null });
+    dispatch({ type: "SET_SELECTED_SESSION", payload: null });
     dispatch({ type: "SET_SHOW_CONFIRM", payload: false });
   }, [dispatch]);
 
   useEffect(() => {
     const closeModal = (e: any) => {
-      if (e.target.id === "studentsConfirmModal") onClose();
+      if (e.target.id === "sessionsConfirmModal") onClose();
     };
     window.addEventListener("click", closeModal);
     // return window.removeEventListener("click", closeModal);
@@ -40,9 +40,11 @@ const ConfirmModal = () => {
   ) => {
     e.stopPropagation();
     try {
-      if (selectedStudent) {
-        await axios.delete("/students/" + selectedStudent.NUM);
-        dispatch({ type: "DELETE", payload: selectedStudent });
+      if (selectedSession) {
+        await axios.delete(
+          "/sessions/" + selectedSession.NUM + "/" + selectedSession.SESSNUM
+        );
+        dispatch({ type: "DELETE", payload: selectedSession });
         onClose();
       }
     } catch (error) {
@@ -55,7 +57,7 @@ const ConfirmModal = () => {
       {showConfirm && (
         <motion.div
           variants={backdrop}
-          id="studentsConfirmModal"
+          id="sessionsConfirmModal"
           initial="hidden"
           animate="visible"
           exit="hidden"
@@ -100,7 +102,7 @@ const ConfirmModal = () => {
                   ></path>
                 </svg>
                 <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
-                  Are you sure you want to delete {selectedStudent?.FNAME}?
+                  Are you sure you want to delete this session?
                 </h3>
                 <button
                   onClick={handleDelete}
