@@ -6,6 +6,8 @@ export type State = {
   students: IStudent[];
   filteredStudents: IStudent[];
   currentStudents: IStudent[];
+  showConfirm: boolean;
+  selectedStudent: IStudent | null;
   sort_id: ORDER;
   sort_year: ORDER;
   sort_plate: ORDER;
@@ -41,6 +43,14 @@ export type StudentsAction =
   | {
       type: "SET_CURRENT_STUDENTS";
       payload: IStudent[];
+    }
+  | {
+      type: "SET_SHOW_CONFIRM";
+      payload: boolean;
+    }
+  | {
+      type: "SET_SELECTED_STUDENT";
+      payload: IStudent | null;
     }
   | {
       type: "SORT_ID";
@@ -82,6 +92,9 @@ export const studentsReducer = (
       return {
         ...state,
         students: state.students.filter((s) => s.NUM !== action.payload.NUM),
+        filteredStudents: state.filteredStudents.filter(
+          (s) => s.NUM !== action.payload.NUM
+        ),
       };
     }
     case "UPDATE": {
@@ -106,12 +119,28 @@ export const studentsReducer = (
         currentStudents: action.payload,
       };
     }
+    case "SET_SHOW_CONFIRM": {
+      return {
+        ...state,
+        showConfirm: action.payload,
+      };
+    }
+    case "SET_SELECTED_STUDENT": {
+      return {
+        ...state,
+        selectedStudent: action.payload,
+      };
+    }
     case "SET_SEARCH_TERM": {
       return {
         ...state,
         searchTerm: action.payload,
-        filteredStudents: !action.payload ? state.students : state.students.filter((s) => s.FNAME.toLowerCase().includes(action.payload.toLocaleLowerCase()))
-      }
+        filteredStudents: !action.payload
+          ? state.students
+          : state.students.filter((s) =>
+              s.FNAME.toLowerCase().includes(action.payload.toLocaleLowerCase())
+            ),
+      };
     }
     case "SORT_ID": {
       return {

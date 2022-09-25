@@ -1,13 +1,42 @@
-import { Routes, Route } from 'react-router-dom';
-import { Navigate } from 'react-router-dom';
-import  StudentsPage  from './pages/StudentsPage';
+import { Routes, Route, useLocation } from "react-router-dom";
+import { Navigate } from "react-router-dom";
+import { AnimatePresence } from "framer-motion";
+
+import { SharedLayout } from "./components";
+import { StudentsPage, SessionsPage, StipsPage } from "./pages";
 
 function App() {
+  const location = useLocation();
   return (
-    <Routes>
-      <Route index element={<Navigate to="/students" />} />
-      <Route  path="/students" element={<StudentsPage/>} />
-    </Routes>
+    <AnimatePresence mode="wait">
+      <Routes location={location} key={location.key}>
+        <Route index element={<Navigate to="/students" />} />
+        <Route
+          path="/students"
+          element={
+            <SharedLayout>
+              <StudentsPage />
+            </SharedLayout>
+          }
+        />
+        <Route
+          path="/sessions"
+          element={
+            <SharedLayout>
+              <SessionsPage />
+            </SharedLayout>
+          }
+        />
+        <Route
+          path="/stips"
+          element={
+            <SharedLayout>
+              <StipsPage />
+            </SharedLayout>
+          }
+        />
+      </Routes>
+    </AnimatePresence>
   );
 }
 

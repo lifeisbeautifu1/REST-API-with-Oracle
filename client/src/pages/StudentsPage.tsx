@@ -1,11 +1,35 @@
 import { StudentsList, PaginateStudents } from "../components";
 import { useStudentsContext } from "../contexts/studentsContext";
 
+import { motion } from "framer-motion";
+
+const containerVariants = {
+  hidden: {
+    opacity: 0,
+  },
+  visible: {
+    opacity: 1,
+    transition: {
+      duration: 0.5,
+    },
+  },
+  exit: {
+    x: "-100vw",
+    transition: {
+      ease: "easeInOut",
+    },
+  },
+};
 const StudentsPage = () => {
   const { studentsDispatch: dispatch } = useStudentsContext();
   return (
-    <div className="font-primary w-4/5 mx-auto mt-8 h-full flex flex-col items-center">
-      <h1 className="text-5xl font-bold mb-6">Students</h1>
+    <motion.div
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
+      exit="exit"
+      className="font-primary w-4/5 mx-auto mt-8 h-full flex flex-col items-center"
+    >
       <div className="w-full flex items-center justify-center relative">
         <button className="py-2 px-4 text-sm hover:bg-gray-100/90 border shadow flex items-center justify-center gap-2 font-semibold rounded">
           Insert New Row{" "}
@@ -51,7 +75,7 @@ const StudentsPage = () => {
       </div>
       <StudentsList />
       <PaginateStudents itemsPerPage={10} />
-    </div>
+    </motion.div>
   );
 };
 

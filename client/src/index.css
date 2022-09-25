@@ -2,10 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
-
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap");
 
 th:first-of-type {
   border-top-left-radius: 0.25rem;
@@ -35,7 +32,7 @@ tr:last-of-type td:last-of-type {
 }
 
 .page-link:hover {
-  background-color:  #dee2e7;
+  background-color: #dee2e7;
 }
 
 .page-item.active .page-link {
@@ -46,12 +43,17 @@ tr:last-of-type td:last-of-type {
 }
 
 .pagination {
-    margin-block: 1rem;
-    margin-bottom: 4rem;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    padding-left: 0;
-    list-style: none;
-    border-radius: 0.25rem;
+  margin-block: 1rem;
+  margin-bottom: 4rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding-left: 0;
+  list-style: none;
+  border-radius: 0.25rem;
+}
+
+.active {
+  --tw-text-opacity: 1;
+  color: rgb(29 78 216 / var(--tw-text-opacity));
 }

@@ -35,6 +35,8 @@ export const StudentsContextProvider: React.FC<
     sort_fname: "DESC",
     sort_bday: "ASC",
     sort_address: "ASC",
+    showConfirm: false,
+    selectedStudent: null,
   });
 
   useEffect(() => {
