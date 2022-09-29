@@ -1,7 +1,7 @@
-import { SessionsList, PaginateSessions } from "../components";
-import { useSessionsContext } from "../contexts/sessionsContext";
+import { SessionsList, PaginateSessions, Record } from '../components';
+import { useSessionsContext } from '../contexts/sessionsContext';
 
-import { motion } from "framer-motion";
+import { motion } from 'framer-motion';
 
 const containerVariants = {
   hidden: {
@@ -11,13 +11,13 @@ const containerVariants = {
     opacity: 1,
 
     transition: {
-      duration: 1,
+      duration: 0.3,
     },
   },
   exit: {
-    x: "-100vw",
+    x: '-100vw',
     transition: {
-      ease: "easeInOut",
+      ease: 'easeInOut',
     },
   },
 };
@@ -31,19 +31,19 @@ const SessionsPage = () => {
       exit="exit"
       className="font-primary w-4/5 mx-auto  h-full flex flex-col items-center"
     >
-      <div className="w-full flex items-center justify-center relative">
+      <div className="w-full flex items-center justify-center gap-4 relative">
         <button
-          onClick={() => dispatch({ type: "SET_IS_INSERT", payload: true })}
+          onClick={() => dispatch({ type: 'SET_IS_INSERT', payload: true })}
           className="py-2 px-4 text-sm hover:bg-gray-100/90 border shadow flex items-center justify-center gap-2 font-semibold rounded"
         >
-          Insert New Row{" "}
+          Insert New Row{' '}
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="w-5 h-5"
+            className="w-4 h-4"
           >
             <path
               strokeLinecap="round"
@@ -52,7 +52,8 @@ const SessionsPage = () => {
             />
           </svg>
         </button>
-        <div className="absolute top-0 right-[230px] flex items-center shadow-inner bg-gray-100/90 gap-3 py-2 px-2 border rounded-md text-gray-600">
+        <Record />
+        <div className="flex items-center shadow-inner bg-gray-100/90 gap-3 py-2 px-2 border rounded-md text-gray-600">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -69,7 +70,7 @@ const SessionsPage = () => {
           </svg>
           <input
             onChange={(e) =>
-              dispatch({ type: "SET_SEARCH_TERM", payload: e.target.value })
+              dispatch({ type: 'SET_SEARCH_TERM', payload: e.target.value })
             }
             type="text"
             className="outline-none bg-transparent text-sm"
