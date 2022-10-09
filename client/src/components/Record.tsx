@@ -132,12 +132,12 @@ function Record() {
     return csv;
   };
   return (
-    <div>
-      <span className="mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">
+    <div className="flex items-center gap-2">
+      <span className="text-sm font-medium text-gray-900 dark:text-gray-400">
         File Type:
       </span>
       <select
-        className="cursor-pointer mx-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        className="cursor-pointer  mx-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 px-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
         value={fileType}
         onChange={(e) => setFileType(e.target.value)}
       >
@@ -146,9 +146,23 @@ function Record() {
         <option value="text">Text</option>
       </select>
       <button
-        className="border rounded text-sm shadow py-1 px-2 hover:bg-gray-100"
+        className="border rounded-lg text-sm shadow p-2 flex items-center gap-2  hover:bg-gray-100"
         onClick={downoald}
       >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth={1.5}
+          stroke="currentColor"
+          className="w-5 h-5 text-gray-600"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m.75 12l3 3m0 0l3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"
+          />
+        </svg>
         Download Record
       </button>
     </div>

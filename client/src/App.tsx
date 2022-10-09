@@ -1,9 +1,9 @@
-import { Routes, Route, useLocation } from "react-router-dom";
-import { Navigate } from "react-router-dom";
-import { AnimatePresence } from "framer-motion";
+import { Routes, Route, useLocation } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
+import { AnimatePresence } from 'framer-motion';
 
-import { SharedLayout } from "./components";
-import { StudentsPage, SessionsPage } from "./pages";
+import { SharedLayout } from './components';
+import { StudentsPage, SessionsPage } from './pages';
 
 function App() {
   const location = useLocation();

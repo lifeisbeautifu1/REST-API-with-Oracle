@@ -1,20 +1,23 @@
-import { Router } from "express";
+import { Router } from 'express';
 
 import {
-    getStudents, getStudent, updateStudent, deleteStudent, createStudent,
-} from '../controllers/students'
+  getStudents,
+  getStudent,
+  updateStudent,
+  deleteStudent,
+  createStudent,
+} from '../controllers/students';
 
-const router = Router()
-
+const router = Router();
 
 router.post('/', createStudent);
 
-router.get('/', getStudents)
+router.get('/', getStudents);
 
-router.get('/:id', getStudent)
+router.get('/:id', getStudent);
 
-router.patch('/:id', updateStudent)
+router.patch('/:id', updateStudent);
 
-router.delete('/:id', deleteStudent)
+router.delete('/:id', deleteStudent);
 
 export default router;

@@ -34,7 +34,7 @@ const StudentsPage = () => {
       <div className="w-full flex items-center justify-end gap-4 relative">
         <button
           onClick={() => dispatch({ type: 'SET_IS_INSERT', payload: true })}
-          className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] py-2 px-4 text-sm hover:bg-gray-100/90 border border-gray-300 shadow flex items-center justify-center gap-2 font-semibold rounded"
+          className="flex py-2 px-4 text-sm hover:bg-gray-100/90 border border-gray-300 shadow flex items-center justify-center gap-2 font-semibold rounded"
         >
           Insert New Row{' '}
           <svg
@@ -53,7 +53,7 @@ const StudentsPage = () => {
           </svg>
         </button>
         <Record />
-        <div className="flex items-center shadow-inner bg-gray-100/90 gap-3 py-2 px-2 border rounded-md text-gray-600">
+        <div className="flex items-center shadow-inner bg-gray-100/80 gap-3 py-2 px-2 border rounded-md text-gray-600">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
