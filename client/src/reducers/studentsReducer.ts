@@ -1,6 +1,6 @@
-import { IStudent } from "../interfaces";
+import { IStudent, IRecord } from '../interfaces';
 
-type ORDER = "DESC" | "ASC";
+type ORDER = 'DESC' | 'ASC';
 
 export type State = {
   students: IStudent[];
@@ -19,72 +19,77 @@ export type State = {
   sort_bday: ORDER;
   sort_address: ORDER;
   searchTerm: string;
+  record: IRecord[];
 };
 
 export type StudentsAction =
   | {
-      type: "ADD";
+      type: 'ADD';
       payload: IStudent;
     }
   | {
-      type: "DELETE";
+      type: 'DELETE';
       payload: IStudent;
     }
   | {
-      type: "UPDATE";
+      type: 'UPDATE';
       payload: IStudent;
     }
   | {
-      type: "SET";
+      type: 'SET';
       payload: IStudent[];
     }
   | {
-      type: "SET_SEARCH_TERM";
+      type: 'SET_RECORD';
+      payload: IRecord[];
+    }
+  | {
+      type: 'SET_SEARCH_TERM';
       payload: string;
     }
   | {
-      type: "SET_CURRENT_STUDENTS";
+      type: 'SET_CURRENT_STUDENTS';
       payload: IStudent[];
     }
   | {
-      type: "SET_SHOW_CONFIRM";
+      type: 'SET_SHOW_CONFIRM';
       payload: boolean;
     }
   | {
-      type: "SET_SELECTED_STUDENT";
+      type: 'SET_SELECTED_STUDENT';
       payload: IStudent | null;
     }
   | {
-      type: "SET_IS_INSERT";
+      type: 'SET_IS_INSERT';
       payload: boolean;
     }
   | {
-      type: "SET_IS_UPDATE";
+      type: 'SET_IS_UPDATE';
       payload: boolean;
     }
   | {
-      type: "SORT_NUM";
+      type: 'SORT_NUM';
     }
   | {
-      type: "SORT_YEAR";
+      type: 'SORT_YEAR';
     }
   | {
-      type: "SORT_PLATE";
+      type: 'SORT_PLATE';
     }
   | {
-      type: "SORT_MB";
+      type: 'SORT_MB';
     }
   | {
-      type: "SORT_MONEY";
+      type: 'SORT_MONEY';
     }
   | {
-      type: "SORT_FNAME";
+      type: 'SORT_FNAME';
     }
   | {
-      type: "SORT_BDAY";
+      type: 'SORT_BDAY';
     }
   | {
-      type: "SORT_ADDRESS";
+      type: 'SORT_ADDRESS';
     };
 
 export const studentsReducer = (
@@ -92,14 +97,14 @@ export const studentsReducer = (
   action: StudentsAction
 ): State => {
   switch (action.type) {
-    case "ADD": {
+    case 'ADD': {
       return {
         ...state,
         students: [...state.students, action.payload],
         filteredStudents: [...state.filteredStudents, action.payload],
       };
     }
-    case "DELETE": {
+    case 'DELETE': {
       return {
         ...state,
         students: state.students.filter((s) => s.NUM !== action.payload.NUM),
@@ -108,7 +113,7 @@ export const studentsReducer = (
         ),
       };
     }
-    case "UPDATE": {
+    case 'UPDATE': {
       return {
         ...state,
         students: state.students.map((r) =>
@@ -119,7 +124,7 @@ export const studentsReducer = (
         ),
       };
     }
-    case "SET": {
+    case 'SET': {
       return {
         ...state,
         students: action.payload,
@@ -127,37 +132,43 @@ export const studentsReducer = (
         currentStudents: action.payload.slice(0, 10),
       };
     }
-    case "SET_CURRENT_STUDENTS": {
+    case 'SET_RECORD': {
+      return {
+        ...state,
+        record: action.payload,
+      };
+    }
+    case 'SET_CURRENT_STUDENTS': {
       return {
         ...state,
         currentStudents: action.payload,
       };
     }
-    case "SET_SHOW_CONFIRM": {
+    case 'SET_SHOW_CONFIRM': {
       return {
         ...state,
         showConfirm: action.payload,
       };
     }
-    case "SET_SELECTED_STUDENT": {
+    case 'SET_SELECTED_STUDENT': {
       return {
         ...state,
         selectedStudent: action.payload,
       };
     }
-    case "SET_IS_INSERT": {
+    case 'SET_IS_INSERT': {
       return {
         ...state,
         isInsert: action.payload,
       };
     }
-    case "SET_IS_UPDATE": {
+    case 'SET_IS_UPDATE': {
       return {
         ...state,
         isUpdate: action.payload,
       };
     }
-    case "SET_SEARCH_TERM": {
+    case 'SET_SEARCH_TERM': {
       return {
         ...state,
         searchTerm: action.payload,
@@ -168,62 +179,62 @@ export const studentsReducer = (
             ),
       };
     }
-    case "SORT_NUM": {
+    case 'SORT_NUM': {
       return {
         ...state,
-        sort_num: state.sort_num === "DESC" ? "ASC" : "DESC",
+        sort_num: state.sort_num === 'DESC' ? 'ASC' : 'DESC',
         filteredStudents:
-          state.sort_num === "DESC"
+          state.sort_num === 'DESC'
             ? state.filteredStudents.sort((a, b) => a.NUM - b.NUM)
             : state.filteredStudents.sort((a, b) => b.NUM - a.NUM),
       };
     }
-    case "SORT_YEAR": {
+    case 'SORT_YEAR': {
       return {
         ...state,
-        sort_year: state.sort_year === "DESC" ? "ASC" : "DESC",
+        sort_year: state.sort_year === 'DESC' ? 'ASC' : 'DESC',
         filteredStudents:
-          state.sort_year === "DESC"
+          state.sort_year === 'DESC'
             ? state.filteredStudents.sort((a, b) => a.YEAR - b.YEAR)
             : state.filteredStudents.sort((a, b) => b.YEAR - a.YEAR),
       };
     }
-    case "SORT_PLATE": {
+    case 'SORT_PLATE': {
       return {
         ...state,
-        sort_plate: state.sort_plate === "DESC" ? "ASC" : "DESC",
+        sort_plate: state.sort_plate === 'DESC' ? 'ASC' : 'DESC',
         filteredStudents:
-          state.sort_plate === "DESC"
+          state.sort_plate === 'DESC'
             ? state.filteredStudents.sort((a, b) => +a.PLATE - +b.PLATE)
             : state.filteredStudents.sort((a, b) => +b.PLATE - +a.PLATE),
       };
     }
-    case "SORT_MB": {
+    case 'SORT_MB': {
       return {
         ...state,
-        sort_mb: state.sort_mb === "DESC" ? "ASC" : "DESC",
+        sort_mb: state.sort_mb === 'DESC' ? 'ASC' : 'DESC',
         filteredStudents:
-          state.sort_mb === "DESC"
+          state.sort_mb === 'DESC'
             ? state.filteredStudents.sort((a, b) => a.MB - b.MB)
             : state.filteredStudents.sort((a, b) => b.MB - a.MB),
       };
     }
-    case "SORT_MONEY": {
+    case 'SORT_MONEY': {
       return {
         ...state,
-        sort_money: state.sort_money === "DESC" ? "ASC" : "DESC",
+        sort_money: state.sort_money === 'DESC' ? 'ASC' : 'DESC',
         filteredStudents:
-          state.sort_money === "DESC"
+          state.sort_money === 'DESC'
             ? state.filteredStudents.sort((a, b) => a.MONEY - b.MONEY)
             : state.filteredStudents.sort((a, b) => b.MONEY - a.MONEY),
       };
     }
-    case "SORT_FNAME": {
+    case 'SORT_FNAME': {
       return {
         ...state,
-        sort_fname: state.sort_fname === "DESC" ? "ASC" : "DESC",
+        sort_fname: state.sort_fname === 'DESC' ? 'ASC' : 'DESC',
         filteredStudents:
-          state.sort_fname === "DESC"
+          state.sort_fname === 'DESC'
             ? state.filteredStudents.sort((a, b) =>
                 a.FNAME > b.FNAME ? 1 : b.FNAME > a.FNAME ? -1 : 0
               )
@@ -232,12 +243,12 @@ export const studentsReducer = (
               ),
       };
     }
-    case "SORT_BDAY": {
+    case 'SORT_BDAY': {
       return {
         ...state,
-        sort_bday: state.sort_bday === "DESC" ? "ASC" : "DESC",
+        sort_bday: state.sort_bday === 'DESC' ? 'ASC' : 'DESC',
         filteredStudents:
-          state.sort_bday === "DESC"
+          state.sort_bday === 'DESC'
             ? state.filteredStudents.sort(
                 (a, b) =>
                   new Date(b.BDAY).getTime() - new Date(a.BDAY).getTime()
@@ -248,12 +259,12 @@ export const studentsReducer = (
               ),
       };
     }
-    case "SORT_ADDRESS": {
+    case 'SORT_ADDRESS': {
       return {
         ...state,
-        sort_address: state.sort_address === "DESC" ? "ASC" : "DESC",
+        sort_address: state.sort_address === 'DESC' ? 'ASC' : 'DESC',
         filteredStudents:
-          state.sort_address === "DESC"
+          state.sort_address === 'DESC'
             ? state.filteredStudents.sort((a, b) =>
                 a.ADDRESS > b.ADDRESS ? 1 : b.ADDRESS > a.ADDRESS ? -1 : 0
               )

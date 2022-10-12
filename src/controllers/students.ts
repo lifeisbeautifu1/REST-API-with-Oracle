@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import { query, Request, Response } from 'express';
 const oracleDB = require('oracledb');
 
 export const getStudents = async (req: Request, res: Response) => {
@@ -72,6 +72,14 @@ export const createStudent = async (req: Request, res: Response) => {
     'SELECT * FROM STUDENTS WHERE STUDENTS.Num = :1',
     [NUM]
   );
-
   res.status(200).json(student.rows[0]);
+};
+
+export const getRecord = async (req: Request, res: Response) => {
+  const dbConnection = await oracleDB.getConnection('mypool');
+  const records = await dbConnection.execute(
+    'SELECT STUDENTS.Num as Num, FName, Year , Bday, Mb, Plate, Money, Address, SessNum, Sub1, Sub2, Sub3 FROM STUDENTS INNER JOIN SESSION_HISTORY ON STUDENTS.Num = SESSION_HISTORY.Num ORDER BY Num ASC',
+    []
+  );
+  return res.status(200).json(records.rows);
 };

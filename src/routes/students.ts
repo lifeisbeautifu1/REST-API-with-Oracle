@@ -6,6 +6,7 @@ import {
   updateStudent,
   deleteStudent,
   createStudent,
+  getRecord,
 } from '../controllers/students';
 
 const router = Router();
@@ -13,6 +14,8 @@ const router = Router();
 router.post('/', createStudent);
 
 router.get('/', getStudents);
+
+router.get('/record', getRecord);
 
 router.get('/:id', getStudent);
 
