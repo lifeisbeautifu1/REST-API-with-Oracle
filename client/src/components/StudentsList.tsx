@@ -1,5 +1,5 @@
-import { useStudentsContext } from "../contexts/studentsContext";
-import { IStudent } from "../interfaces";
+import { useStudentsContext } from '../contexts/studentsContext';
+import { IStudent } from '../interfaces';
 
 const StudentsList = () => {
   const {
@@ -11,16 +11,16 @@ const StudentsList = () => {
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
     student: IStudent
   ) => {
-    dispatch({ type: "SET_SELECTED_STUDENT", payload: student });
-    dispatch({ type: "SET_IS_UPDATE", payload: true });
+    dispatch({ type: 'SET_SELECTED_STUDENT', payload: student });
+    dispatch({ type: 'SET_IS_UPDATE', payload: true });
   };
 
   const handleDelete = async (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
     student: IStudent
   ) => {
-    dispatch({ type: "SET_SELECTED_STUDENT", payload: student });
-    dispatch({ type: "SET_SHOW_CONFIRM", payload: true });
+    dispatch({ type: 'SET_SELECTED_STUDENT', payload: student });
+    dispatch({ type: 'SET_SHOW_CONFIRM', payload: true });
   };
 
   return (
@@ -29,10 +29,10 @@ const StudentsList = () => {
         <tr className="uppercase">
           <th
             className="p-4 px-8 cursor-pointer"
-            onClick={() => dispatch({ type: "SORT_NUM" })}
+            onClick={() => dispatch({ type: 'SORT_NUM' })}
           >
             <div className="flex items-center justify-center">
-              Num{" "}
+              Num{' '}
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="ml-1 w-3 h-3 "
@@ -46,10 +46,10 @@ const StudentsList = () => {
           </th>
           <th
             className="p-4 px-8 cursor-pointer"
-            onClick={() => dispatch({ type: "SORT_FNAME" })}
+            onClick={() => dispatch({ type: 'SORT_FNAME' })}
           >
             <div className="flex items-center justify-center">
-              <span>Fname</span>{" "}
+              <span>Fname</span>{' '}
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="ml-1 w-3 h-3 "
@@ -63,10 +63,10 @@ const StudentsList = () => {
           </th>
           <th
             className="p-4 px-8 cursor-pointer"
-            onClick={() => dispatch({ type: "SORT_YEAR" })}
+            onClick={() => dispatch({ type: 'SORT_YEAR' })}
           >
             <div className="flex items-center justify-center">
-              <span>Year</span>{" "}
+              <span>Year</span>{' '}
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="ml-1 w-3 h-3 "
@@ -80,10 +80,10 @@ const StudentsList = () => {
           </th>
           <th
             className="p-4 px-8 cursor-pointer"
-            onClick={() => dispatch({ type: "SORT_BDAY" })}
+            onClick={() => dispatch({ type: 'SORT_BDAY' })}
           >
             <div className="flex items-center justify-center">
-              Bday{" "}
+              Bday{' '}
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="ml-1 w-3 h-3 "
@@ -97,10 +97,10 @@ const StudentsList = () => {
           </th>
           <th
             className="p-4 px-8 cursor-pointer"
-            onClick={() => dispatch({ type: "SORT_PLATE" })}
+            onClick={() => dispatch({ type: 'SORT_PLATE' })}
           >
             <div className="flex items-center justify-center">
-              Plate{" "}
+              Plata{' '}
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="ml-1 w-3 h-3 "
@@ -114,10 +114,10 @@ const StudentsList = () => {
           </th>
           <th
             className="p-4 px-8 cursor-pointer"
-            onClick={() => dispatch({ type: "SORT_MB" })}
+            onClick={() => dispatch({ type: 'SORT_MB' })}
           >
             <div className="flex items-center justify-center">
-              Mb{" "}
+              Mb{' '}
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="ml-1 w-3 h-3 "
@@ -131,10 +131,10 @@ const StudentsList = () => {
           </th>
           <th
             className="p-4 px-8 cursor-pointer"
-            onClick={() => dispatch({ type: "SORT_MONEY" })}
+            onClick={() => dispatch({ type: 'SORT_MONEY' })}
           >
             <div className="flex items-center justify-center">
-              Money{" "}
+              Money{' '}
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="ml-1 w-3 h-3 "
@@ -148,10 +148,10 @@ const StudentsList = () => {
           </th>
           <th
             className="p-4 px-8 cursor-pointer"
-            onClick={() => dispatch({ type: "SORT_ADDRESS" })}
+            onClick={() => dispatch({ type: 'SORT_ADDRESS' })}
           >
             <div className="flex items-center justify-center">
-              Address{" "}
+              Address{' '}
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="ml-1 w-3 h-3 "

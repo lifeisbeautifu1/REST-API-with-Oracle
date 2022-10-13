@@ -34,7 +34,7 @@ const StudentsPage = () => {
       <div className="w-full flex items-center justify-end gap-4 relative">
         <button
           onClick={() => dispatch({ type: 'SET_IS_INSERT', payload: true })}
-          className="flex py-2 px-4 text-sm hover:bg-gray-100/90 border border-gray-300 shadow flex items-center justify-center gap-2 font-semibold rounded"
+          className="flex py-2 px-4 text-sm hover:bg-gray-100/90 border border-gray-300 shadow items-center justify-center gap-2 font-semibold rounded"
         >
           Insert New Row{' '}
           <svg

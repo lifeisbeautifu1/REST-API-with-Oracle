@@ -28,7 +28,7 @@ function Record() {
       output += `${'Num'.padEnd(10, ' ')} ${'Fname'.padEnd(
         20,
         ' '
-      )} ${'Year'.padEnd(10, ' ')} ${'Bday'.padEnd(30, ' ')} ${'Plate'.padEnd(
+      )} ${'Year'.padEnd(10, ' ')} ${'Bday'.padEnd(30, ' ')} ${'Plata'.padEnd(
         10,
         ' '
       )} ${'Mb'.padEnd(10, ' ')} ${'Money'.padEnd(10, ' ')} ${'Address'.padEnd(
@@ -64,7 +64,7 @@ function Record() {
         'Fname',
         'Year',
         'Bday',
-        'Plate',
+        'Plata',
         'Mb',
         'Money',
         'Address',
